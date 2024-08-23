@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Crear usuario Jose
+      user: 
+        name: jose
+        group: wheel 
+        # Hash de 1234
+        password: $6$3nhXdmHa$J4..LXm46BwAHroQmGaS3bDGoP0YqJgDWL4pPM5lUDA9igHaTzpEvR13xv.ZzKzwOC2SulYp9/65SbHcmbqVz/
+
+    - name: Agregar clave SSH a usuario Jose 
+      authorized_key: 
+        user: jose 
+        key: "{{ item }}"
+        state: present
+      with_items:
+        - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5lPtpyL6Z0Ww1T7ZEXQmUnjmCvRRBcUtIs1FO4S0izem5HPZFh4NSALoUqfxkaWMNuQ5JP/z6op+ZVAWdWFXlBHPiaZx+E9RLW1D+hxK/KwfugrCXt3cMy2v3+khT18u8mICEl/7LVCwoUMjX9rjEBDXrfeI6s2lzpL92kWXbxTUd3rhWIyd7Hc8idhCg4842S30KP279/srfid/N/XFuJ7vDm0egKqDl6YAbkEc/43gcxdUwpNrFEpMBspZQxGC+x6CvmvNoR3OA2ewc8ELHlD7B9bokjQuRMWtkaOhV36YkhNS71IO6X09ZqWUfWdahRTKJxqZuOdBJVDjFkvoz root@6a74a07a7d5f"
+
